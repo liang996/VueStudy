@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+  <title>记事本运用</title>
+</head>
+
+<body>
+  <div id="app">
+    <input type="text" v-model="message" @keyup.enter="add" />
+    <button @click="clear" v-show="arr.length!==0">清空数据</button>
+
+    <ol>
+      <li v-for="(item, index) in arr" @click="del(index)">{{item}}</li>
+    </ol>
+    <h3 v-show="arr.length!==0">一共{{arr.length}}条数据</h3>
+  </div>
+  <script>
+    var app = new Vue({
+      el: "#app",
+      data: {
+        message: "",
+        arr: ["林俊杰", "王力宏", "五月天", "吴克群"],
+      },
+      methods: {
+        add: function () {
+          console.log(" this.message,,,", this.message);
+          this.arr.push(this.message);
+        },
+        del: function (index) {
+          console.log(" this.index,,,", index);
+          this.arr.splice(index, 1);
+        },
+        clear: function () {
+          this.arr = [];
+        },
+      },
+    });
+  </script>
+</body>
+
+</html>

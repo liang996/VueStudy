@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <style>
+    td {
+      width: 80px;
+    }
+  </style>
+
+  <title>axios使用</title>
+</head>
+
+<body>
+  <div id="app">
+    <input type="text" v-model="city" @keyup.enter="getTq" />
+    <input type="button" value="查询" @click="find" />
+    <ul>
+      <li @click="select('北京')">北京</li>
+      <li @click="select('上海')">上海</li>
+      <li @click="select('广州')">广州</li>
+      <li @click="select('深圳')">深圳</li>
+    </ul>
+    <table border="1" v-for="(item,index) in forecast">
+      <tr>
+        <th>天气</th>
+        <th>最低温度</th>
+        <th>最高温度</th>
+        <th>日期</th>
+      </tr>
+      <tr>
+        <td>{{item.fengxiang}}</td>
+        <td>{{item.low}}</td>
+        <td>{{item.high}}</td>
+        <td>{{item.date}}</td>
+      </tr>
+    </table>
+  </div>
+  <script>
+    var app = new Vue({
+      el: "#app",
+      data: {
+        city: "武汉",
+        forecast: [],
+      },
+      methods: {
+        getTq: function () {
+          var that = this;
+          axios
+            .get("http://wthrcdn.etouch.cn/weather_mini?city=" + this.city)
+            .then(function (res) {
+              console.log("res,,,,", res);
+
+              that.forecast = res.data.data.forecast;
+            })
+            .catch(function (err) {
+              console.log("err,,,,", err);
+            });
+        },
+        // find: function () {//第一种方法（复制一份）
+        //   var that = this
+        //   axios.get('http://wthrcdn.etouch.cn/weather_mini?city=' + this.city).then(
+        //     function (res) {
+        //       console.log("res,,,,", res)
+
+        //       that.forecast = res.data.data.forecast
+        //     }
+        //   ).catch(
+        //     function (err) {
+        //       console.log("err,,,,", err)
+
+        //     }
+
+        //   )
+        // },
+        find: function () {
+          //第二种方法
+          this.getTq();
+        },
+        select: function (data) {
+          console.log("data,,,,", data);
+          this.city = data;
+        },
+      },
+    });
+  </script>
+</body>
+
+</html>

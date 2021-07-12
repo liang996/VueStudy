@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+  <title>v-for指令介绍</title>
+</head>
+
+<body>
+  <h1>v-for指令介绍</h1>
+  <div class="app">
+    <h1>{{mesg}}</h1>
+    <button @click="add">数组添加</button>
+    <button @click="del">数组移除</button>
+    <button @click="add1">对象数组添加</button>
+    <button @click="del1">对象数组移除</button>
+    <h3>我喜欢的明星</h3>
+
+    <ol>
+      <li v-for="(item ,index) in arr">{{item}}</li>
+    </ol>
+
+    <ol>
+      <li v-for="(item ,index) in obj">{{item.name}}</li>
+    </ol>
+  </div>
+  <script>
+    var mesg = "v-for指令:根据数据生成列表结构";
+
+    var app = new Vue({
+      el: ".app",
+      data: {
+        mesg,
+        arr: ["林俊杰", "王力宏", "五月天", "吴克群"],
+        obj: [
+          { name: "林俊杰" },
+          { name: "王力宏" },
+          { name: "五月天" },
+          { name: "吴克群" },
+        ],
+      },
+      methods: {
+        add: function () {
+          this.arr.push("胡歌")
+        },
+        del: function () {
+          this.arr.pop()
+        },
+        add1: function () {
+          this.obj.push({ name: "胡歌" })
+        },
+        del1: function () {
+          this.obj.pop()
+        }
+      }
+    });
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+  <title>vue第一个实例</title>
+</head>
+<body>
+  <h1>vue第一个实例</h1>
+  <ul>
+    <li>el：挂载点的意思</li>
+    <li>data：数据对象点意思</li>
+
+  </ul>
+
+
+<div id="demo">
+  {{message}}，<br/>
+  {{name}}，<br/>
+  我是对象：{{obj.name}}<br/>
+ 我手机是： {{Arr[2]}}<br/>
+
+
+</div>
+<script>
+
+var message="hello,Vue"
+var obj={name:1}
+var Arr=["小米","华为","Vivo"]
+
+ var app= new Vue({
+el:"#demo",
+data:{
+  message,
+  obj,
+  Arr,
+  name:"我是学员亮"
+}
+  })
+</script>
+</body>
+</html>

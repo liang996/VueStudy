@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <title>vue音乐吧</title>
+</head>
+
+<body>
+  <div id="app">
+    <input type="text" v-model="name" @keyup.enter="getMusic" />
+    <audio :src="musicUrl" controls="controls" autoplay="autoplay"></audio>
+
+    <ul v-for="(item,index) in music">
+      <li>
+        {{index+1}}-
+        {{item.name}}
+
+        <button @click="Play(item.id)">播放</button>
+      </li>
+
+    </ul>
+
+  </div>
+  <script>
+    var app = new Vue({
+      el: "#app",
+      data: {
+        name: "王力宏",
+        music: [],
+        musicUrl: "",
+      },
+      methods: {
+        getMusic: function () {
+          var that = this
+          axios.get("https://autumnfish.cn/search?keywords=" + this.name).then(function (res) {
+            console.log(res)
+            that.music = res.data.result.songs
+          }, function (err) {
+            console.log(err)
+          }).catch(function (err) {
+            console.log(err)
+          })
+        },
+        Play: function (id) {
+          console.log("id,,,,,,", id)
+          var that = this
+          axios.get("https://autumnfish.cn/song/url?id=" + id).then(function (res) {
+            that.musicUrl = res.data.data[0].url
+            console.log("音乐详情", res.data.data[0].url)
+          }, function (err) {
+            console.log(err)
+          }).catch(function (err) {
+            console.log(err)
+          })
+
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

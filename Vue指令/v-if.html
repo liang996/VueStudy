@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+  <title>v-if指令介绍</title>
+</head>
+
+<body>
+  <h1>v-if指令介绍</h1>
+  <ul>
+    <li>v-if根据表达值的真假切换元素的显示和隐藏（操纵dom元素）</li>
+    <li>v-if本质是通过操作dom元素类切换显示状态</li>
+    <li>v-if表达式的值为true,元素存在于dom树中，为false,从dom树中移除</li>
+    <li>频繁的切换v-show，反之使用v-if，因为前者的切换消耗小</li>
+
+    <li>v-if操作的是dom树，v-show操作的是样式，V-if会把dom树移除</li>
+
+  </ul>
+  <div id="app">
+    <input type="button" value="显示" v-on:click="show"  v-if="!isShow" >
+    <input type="button" value="隐藏" v-on:click="show"  v-if="isShow">
+
+    <h2>{{num}}</h2>
+    <input type="button" value="数字到5隐藏图片及按钮" v-on:click="isNum"  v-if="isShow">
+
+
+<img src="https://zb.estar-info.com/staic/css/images/logo2.png" v-if="isShow">
+  </div>
+  <script>
+    var app = new Vue({
+      el: "#app",
+      data: {
+        isShow:true,
+        num:3
+      },
+      methods: {
+        show: function () {
+          this.isShow= !this.isShow
+        },
+        isNum: function () {
+          if(this.num<5){
+            this.num++
+            return
+          }
+          this.isShow= !this.isShow
+
+        },
+       
+      }
+
+    })
+  </script>
+
+</body>
+
+</html>

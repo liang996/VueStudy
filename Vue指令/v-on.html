@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+  <title>v-on指令介绍</title>
+</head>
+
+<body>
+  <h1>v-on指令介绍</h1>
+  <ul>
+    <li>v-on一般用于事件处理</li>
+    <li>v-on简写：@表示即可</li>
+
+  </ul>
+  <div id="app">
+    <input type="button" value="v-on指令" v-on:click="eat">
+    <input type="button" value="v-on指令简写" @click="eat">
+    <input type="button" value="点击改变下面内容" @click="msg">
+    <h2>{{mesg}}</h2>
+
+  </div>
+  <script>
+    var mesg = "v-on一般用于事件处理（为元素绑定事件）,其简写为：@（后接入事件名称）"
+    var app = new Vue({
+      el: "#app",
+      data: {
+        mesg
+      },
+      methods: {
+        eat: function () {
+          alert("刚刚吃完午饭，现在开搞Vue学习")
+        },
+        msg: function () {
+          console.log(this.mesg)
+          this.mesg="我已经发生了变化"
+        }
+      }
+
+    })
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <title>实现图片切环</title>
+  </head>
+
+  <body>
+    <div id="app">
+      <input type="button" value="上一张"  @click="last" v-show="index!==0" />
+      <input type="button" value="下一张"  @click="next" v-show="index<isUrlArr.length-1"/><br />
+      <img :src="isUrlArr[index]" />
+    </div>
+
+    <script>
+      var app = new Vue({
+        el: "#app",
+        data: {
+          isUrlArr: [
+            "https://zb.estar-info.com/staic/css/images/logo2.png",
+            "https://cn.vuejs.org/images/logo.png",
+            "https://cn.vuejs.org/images/dcloud1.png",
+          ],
+          index:0
+        },
+        methods: {
+          last:function(){
+            this.index--
+            console.log("上一张")
+          },
+          next:function(){
+            this.index++
+
+            console.log("下一张")
+          }
+        },
+      });
+    </script>
+  </body>
+</html>

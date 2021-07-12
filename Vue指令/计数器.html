@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+  <title>v-on指令介绍</title>
+</head>
+
+<body>
+  <h1>计算器运用</h1>
+
+ 
+  <div id="app">
+    <input type="button" value="-" @click="del">
+    <h2>{{num}}</h2>
+    <input type="button" value="+" v-on:click="add">
+
+  </div>
+  <script>
+    var num =0
+    var app = new Vue({
+      el: "#app",
+      data: {
+        num
+      },
+      methods: {
+        add: function () {
+      if(this.num<10)
+      this.num+=1
+      return
+
+     
+        },
+        del: function () {
+        if(this.num>0) {
+          this.num-=1
+
+        }
+
+       return
+
+        }
+      }
+
+    })
+  </script>
+
+</body>
+
+</html>

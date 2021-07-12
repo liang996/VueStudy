@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+  <title>axios使用</title>
+</head>
+
+<body>
+  <div id="app">
+    <input type="button" value="点击切换笑话" @click="getJokes" />
+    <h1>{{message}}</h1>
+
+  </div>
+  <script>
+    var app = new Vue({
+      el: "#app",
+      data: {
+        message: "有次乘某航班，服务员拿着一碗面的单子问：先生，要不要吃晚餐？我：有别的选择吗？服务员：吃或者不吃。我：还是吃吧！"
+      },
+      methods: {
+        getJokes: function () {
+          console.log("外面，，，，", this.message)//打印message的数据
+          var that = this
+
+          axios.get("https://autumnfish.cn/api/joke/list?num=3").then(function (res) {
+            console.log("res", res)
+            console.log("里面，，，，", this.message)//undefined
+            that.message = res.data.jokes[0]
+          }).catch(
+            function (err) {
+              console.log("err", err)
+            }
+          )
+        }
+      }
+    })
+
+  </script>
+</body>
+
+</html>

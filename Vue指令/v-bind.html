@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+  <title>v-bind指令介绍</title>
+  <style>
+    .sy{
+      border:2px solid pink;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>v-bind指令介绍</h1>
+  <ul>
+    <li>v-bind主要用于设置元素的属性：如img属性有src等</li>
+    <li>v-bind:属性名称简写方式(:属性名称)</li>
+
+  
+  </ul>
+  <div id="app">
+    <input type="button" value="显示" v-on:click="show"  v-show="!isShow" >
+    <input type="button" value="隐藏" @click="show"  v-show="isShow">
+    <input type="button" value="给图片添加样式" @click="isSty"  v-show="isShow">
+
+
+    <h2>{{num}}</h2>
+    <h2 v-html="num"></h2>
+    <h2 v-text="num"></h2>
+
+    <input type="button" value="数字到5隐藏图片及按钮" v-on:click="isNum"  v-show="isShow">
+
+
+<img :src="imgUrl"   v-show="isShow" :title="title" :class="{sy:isStyle}">
+<img :src="imgUrl"   v-show="isShow" :title="title" :class="isStyle?'sy':''">
+
+<img v-bind:src="imgUrls"  v-show="isShow"  :alt="alt">
+
+  </div>
+  <script>
+    var app = new Vue({
+      el: "#app",
+      data: {
+        isShow:true,
+        num:3,
+        imgUrl:"https://zb.estar-info.com/staic/css/images/logo2.png",
+        imgUrls:"https://zb.estar-info.com/staic/css/imagses/logo2.png",
+        isStyle:false,
+
+        title:"kkkk",
+        alt:'我是提示'
+
+      },
+      methods: {
+        show: function () {
+          this.isShow= !this.isShow
+        },
+        isNum: function () {
+          if(this.num<5){
+            this.num++
+            return
+          }
+          this.isShow= !this.isShow
+
+        },
+        isSty:function(){
+          this.isStyle= !this.isStyle
+
+        }
+       
+      }
+
+    })
+  </script>
+
+</body>
+
+</html>
