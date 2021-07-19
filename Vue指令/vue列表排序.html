@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+  <title>列表渲染</title>
+</head>
+
+<body>
+  <h1>列表渲染</h1>
+  <div id="app">
+    <h2>人员列表</h2>
+    <!-- v-for...of:遍历数组-->
+    <input type="text" v-model="seachName" placeholder="请输入名称">
+    <button @click="sotType=1">升序</button>
+    <button @click="sotType=2">降序</button>
+
+    <button @click="sotType=0">原顺序</button>
+
+    <ul>
+      <li v-for="(item ,index) of objArrSS" :key="item.id">
+        {{item.name}}-{{item.age}}
+      </li>
+    </ul>
+  </div>
+  <script>
+    new Vue({
+      el: "#app",
+      data: {
+        sotType: 0,
+        seachName: "",
+        objArr: [
+          { id: 1, name: "周杰伦", age: 18 },
+          { id: 2, name: "马天宇", age: 19 },
+          { id: 3, name: "周慧敏", age: 17 },
+          { id: 4, name: "刘宇宁", age: 32 },
+        ],
+        objArrs: []
+      },
+
+      computed: {
+        objArrSS() {
+          const arr = this.objArr.filter((p) => {
+            return p.name.indexOf(this.seachName) !== -1
+          })
+          if (this.sotType) {//判断是否需要排序
+            arr.sort((a, b) => {
+              return this.sotType === 1 ? a.age - b.age : b.age - a.age
+            })
+          }
+          return arr
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

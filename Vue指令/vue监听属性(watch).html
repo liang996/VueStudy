@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+  <title>天气切换</title>
+</head>
+
+<body>
+  <h1>天气切换</h1>
+  <div id="app">
+    <h3>今天天气很{{isHot?"炎热":"凉爽"}}</h3>
+    <h3>今天天气很{{changs}}</h3>
+
+    <button @click="chang">切换</button>
+    <!-- <button @click="isHot = !isHot">切换2</button> -->
+
+  </div>
+  <script>
+    const Vm = new Vue({
+      el: "#app",
+      data: {
+        isHot: false
+      },
+      computed: {
+        changs() {
+
+          return this.isHot ? "炎热" : "凉爽"
+        }
+      },
+      methods: {
+        chang() {
+          return this.isHot = !this.isHot
+        }
+      },
+      // watch: {//第一种方法
+      //   isHot: {//isHot:要监视的属性
+      //     immediate: true, //immediate：初始化时让handler调用
+      //     //handler调用时机：当isHot被修改时
+      //     handler(newVules, oldVules) {
+      //       console.log("被修改了")
+      //       console.log(newVules, oldVules)
+      //     }
+      //   }
+
+      // }
+
+    })
+    Vm.$watch("isHot", {//isHot:要监视的属性
+      immediate: true, //immediate：初始化时让handler调用
+      //handler调用时机：当isHot被修改时
+      handler(newVules, oldVules) {
+        console.log("被修改了")
+        console.log(newVules, oldVules)
+      }
+    })
+  </script>
+</body>
+
+</html>

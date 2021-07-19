@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+  <title>列表渲染</title>
+</head>
+
+<body>
+  <h1>列表渲染</h1>
+  <div id="app">
+    <h2>人员列表</h2>
+    <!-- v-for...in:遍历数组-->
+    <ul>
+      <li v-for="(item ,index) in objArr" :key="item.id">
+        {{item.name}}-{{item.age}}
+      </li>
+    </ul>
+
+    <!-- v-for...of:遍历数组-->
+    <ul>
+      <li v-for="(item ,index) of objArr" :key="item.id">
+        {{item.name}}-{{item.age}}
+      </li>
+    </ul>
+
+
+    <!-- v-for...of:遍历对象(index 为key,item为value)-->
+    <ul>
+      <li v-for="(item ,index) of obj" :key="index">
+        {{index}}- {{item}}
+      </li>
+    </ul>
+
+    <!-- v-for...of:遍历字符串(index 为key,item为value)-->
+    <ul>
+      <li v-for="(item ,index) of str" :key="index">
+        {{item}}- {{index}}
+      </li>
+    </ul>
+    <!-- v-for...of:遍历实数(index 为key,item为value)-->
+    <ul>
+      <li v-for="(item ,index) of 5" :key="index">
+        {{item}}- {{index}}
+      </li>
+    </ul>
+  </div>
+  <script>
+    const vm = new Vue({
+      el: "#app",
+      data: {
+        objArr: [
+          { id: 1, name: "小明", age: 18 },
+          { id: 2, name: "小张", age: 19 },
+          { id: 3, name: "小王", age: 17 },
+        ],
+        obj: { id: 1, name: "小明", age: 18 },
+        str: "hello"
+      }
+    })
+  </script>
+</body>
+
+</html>

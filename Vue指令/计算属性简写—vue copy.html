@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+  <title>计算属性简写（只读不改可以用）</title>
+</head>
+
+<body>
+  <h1>计算属性简写</h1>
+  <div id="app">
+    姓： <input type="text" v-model="xing">
+    名： <input type="text" v-model="ming">
+    <!--(计算属性简写)-->
+    <h3>{{fullMing}}</h3>
+    <h3>{{fullMing1}}</h3>
+
+    <h3>{{fullMing2}}</h3>
+
+  </div>
+  <script>
+    Vue.config.productionTip = true
+    var Vm = new Vue({
+      el: "#app",
+      data: {
+        xing: "刘",
+        ming: "敏"
+      },
+      //计算属性简写用法
+      computed: {
+        fullMing: {
+          get() {
+            return this.xing.slice(0, 3) + "-" + this.ming
+          }
+        },
+        fullMing1() {
+          return this.xing.slice(0, 3) + "-" + this.ming
+        },
+        fullMing2: function () {
+          return this.xing.slice(0, 3) + "-" + this.ming
+        }
+      },
+    })
+  </script>
+</body>
+
+</html>

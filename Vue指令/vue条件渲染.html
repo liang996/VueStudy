@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+  <title>条件渲染</title>
+</head>
+
+<body>
+  <h1>条件渲染</h1>
+  <div id="app">
+    <!--v-show:控制样式,使用频率高的适用-->
+    <div v-show="isShow">{{name}}</div>
+    <!--v-if:控制dom，使用频率低的适用-->
+
+    <div v-if="isIF">{{name}}</div>
+
+    <div>当前值是：{{n}}</div>
+    <div v-if="n===1">小米</div>
+    <div v-if="n===2">华为</div>
+    <div v-if="n===3">三星</div>
+    <button @click="n++">累加</button>
+
+    <br />
+    <div>当前值是：{{num}}</div>
+
+    <div v-if="num===3">林俊杰</div>
+    <div v-else-if="num===2">李连杰</div>
+    <div v-else>王祖贤</div>
+    <button @click="num--">累减</button>
+    <br />
+
+    <template v-if="nums===1">
+      <!--有时候不需要最外层的div，如何去掉，就得用template,template（模版意思）：template只能配合v-if-->
+
+      <div>林俊杰</div>
+      <div>李连杰</div>
+      <div>王祖贤</div>
+    </template>
+
+
+  </div>
+  <script>
+    const vm = new Vue({
+      el: "#app",
+      data: {
+        name: "条件渲染",
+        isShow: true,
+        isIF: false,
+        n: 0,
+        num: 4,
+        nums: 1
+
+      }
+    })
+  </script>
+</body>
+
+</html>
