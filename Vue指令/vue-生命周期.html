@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/dayjs/1.10.6/dayjs.min.js"></script>
+  <title>v-once指令</title>
+</head>
+
+<body>
+  <div id="app">
+    <h1>{{n}}</h1>
+
+    <button @click="n++">点击加1</button>
+    <button @click="WillDestroy">销毁生命周期</button>
+
+  </div>
+  <script>
+
+    const vm = new Vue({
+      el: "#app",
+      data: {
+        opacity: 1,
+        n: 1
+      },
+      methods: {
+        WillDestroy() {
+          this.$destroy()
+          console.log(" this.$destroy()")
+
+        }
+      },
+      beforeCreate() {
+        console.log("beforeCreate:在数据监测和数据代理之前执行")
+      },
+      created() {
+        console.log("Created:在数据监测和数据代完成后执行")
+        // debugger
+      },
+      beforeMount() {
+        console.log("beforeMount:在数据挂载之前执行")
+      },
+
+      mounted() {
+        console.log("mounted:将虚拟dom转真实dom，一般这个生命周期用来添加定时器，发送s网络请求，等等操作")
+
+
+      },
+      beforeUpdate() {
+        console.log("beforeUpdate:数据更新前调用，注意：这个钩子里面，数据是新的，但是此时页面上不会出现最新值")
+        console.log(this.n)
+      },
+      updated() {
+        console.log("updated:数据更新完毕，注意：这个钩子里面，数据是新的，此时页面上也出现最新值")
+        console.log(this.n)
+
+      },
+      beforeDestroy() {
+        console.log("beforeDestroy:vm数据将要卸载时调用，一般这个生命周期用来去除定时器，解绑自定义事件，做一些收尾性的操作")
+
+      },
+      destroyed() {
+        console.log("destroyed:vm数据卸载完成时调用")
+
+      },
+    })
+
+
+  </script>
+</body>
+
+</html>

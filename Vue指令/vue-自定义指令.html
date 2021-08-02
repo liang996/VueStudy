@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/dayjs/1.10.6/dayjs.min.js"></script>
+  <title>v-once指令</title>
+</head>
+
+<body>
+  <div id="app">
+    <h1> 正常值是：<span v-text="n"></span></h1>
+
+    <h1>放大10倍值是：<span v-big="n"></span></h1>
+    <h1>放大10倍值是：<span v-big-num="n"></span></h1>
+
+    <!--v-big:为i自定义指令-->
+    <button @click="n++">点击加1</button>
+  </div>
+  <script>
+
+    new Vue({
+      el: "#app",
+      data: {
+        n: 10
+      },
+      directives: {
+        big(element, binging) {
+          console.log(element, binging.value)
+
+          element.innerText = binging.value * 10
+        },
+        "big-num"(element, binging) {
+          console.log(element, binging.value)
+
+          element.innerText = binging.value * 10
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+  <title>set()使用</title>
+</head>
+
+<body>
+  <div id="app">
+    <h1>学生信息</h1>
+    <button @click="student.age++">年龄加1</button>
+    <button @click="addSex">添加性别属性，默认值为：男</button>
+    <button @click="student.sex='未知'">修改性别属性，值为：未知</button>
+
+    <button @click="studentIndexAdd">在列表首位添加一个其他学生</button>
+    <button @click="studentWeiAdd">在列表末尾添加一个其他学生</button>
+
+    <button @click="studentUpdate">修改其他学生第一个名称为：王力宏</button>
+    <button @click="addAiHao">添加一个爱好</button>
+    <button @click="AiHaoUpdate">修改第一个爱好为：开车</button>
+    <button @click="filterAiHao">过滤爱好"摄影"</button>
+
+    <br />
+    <br />
+    <h3>姓名：{{student.name}}</h3>
+    <h3>年龄：{{student.age}}</h3>
+    <h3 v-if="student.sex">性别：{{student.sex}}</h3>
+
+    <br />
+    <h1>爱好</h1>
+    <ul>
+      <li v-for="(p,index) of  student.aiHao " :key="index">
+        {{p}}
+
+      </li>
+    </ul>
+    <h1>其他学生</h1>
+    <ul>
+      <li v-for="(p,index) of student.otherStudent " :key="index">
+        {{p.name}}- {{p.age}}
+
+      </li>
+    </ul>
+  </div>
+  <script>
+    new Vue({
+      el: "#app",
+      data: {
+        student: {
+          name: "小明",
+          age: 18,
+          aiHao: ["唱歌", "做饭", "摄影"],
+          otherStudent: [
+            { name: "张三", age: "18" },
+            { name: "刘二", age: "19" }
+          ]
+        }
+      },
+      methods: {
+        studentIndexAdd() {
+          this.student.otherStudent.unshift({ name: "马丁", age: "20" })
+
+
+        },
+        studentWeiAdd() {
+
+          this.$set(this.student.otherStudent, 2, { name: "马丁", age: "20" },)//第二种写法
+
+        },
+        filterAiHao() {
+
+          this.student.aiHao = this.student.aiHao.filter(p => {
+            return p !== "摄影"
+          })
+
+        },
+        addSex() {
+          // Vue.set(this.student, "sex", "男",)//第一种写法
+          this.$set(this.student, "sex", "男",)//第二种写法
+        },
+        studentUpdate() {
+          this.student.otherStudent[0].name = "王力宏"
+          this.student.otherStudent[0].age = "30"
+
+        },
+        addAiHao() {
+          this.student.aiHao.push("打游戏")
+
+        },
+        AiHaoUpdate() {
+          this.student.aiHao.splice(0, 1, "开车")//第一种写法
+
+          // Vue.set(this.student.aiHao, 0, "开车")//第二种写法
+
+        },
+      },
+    })
+
+  </script>
+</body>
+
+</html>

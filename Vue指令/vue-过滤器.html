@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/dayjs/1.10.6/dayjs.min.js"></script>
+  <title>set()使用</title>
+</head>
+
+<body>
+  <div id="app">
+    <h1>计算属性写法：现在时间是：{{Time}}</h1>
+    <h1>方法写法：现在时间是：{{methodsTime()}}</h1>
+    <h1>过滤器写法：现在时间是：{{time | filtersTime}}</h1>
+    <h1>过滤器写法：现在时间是：{{time | filtersTime("YYYY-MM-DD") | myTime }}</h1>
+
+  </div>
+  <script>
+    new Vue({
+      el: "#app",
+      data: {
+        time: 1627217251592  //Date.now()
+      },
+      computed: {
+        Time() {
+          return dayjs(this.time).format("YYYY-MM-DD HH:mm:ss")
+        }
+      },
+      methods: {
+        methodsTime() {
+          return dayjs(this.time).format("YYYY-MM-DD HH:mm:ss")
+        }
+      },
+      filters: {
+        filtersTime(value, str = "YYYY-MM-DD HH:mm:ss") {
+          return dayjs(value).format(str)
+        },
+        myTime(value) {
+          return value.slice(0, 4)
+        }
+      },
+
+    }
+    )
+  </script>
+</body>
+
+</html>
